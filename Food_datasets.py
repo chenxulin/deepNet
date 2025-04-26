@@ -1,3 +1,5 @@
+# Load and preprocess image data 
+
 # Loading Image Data with a custom Dataset(More Generally)
 import os
 import random
@@ -6,16 +8,6 @@ from pathlib import Path
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms
-
-# Set random seed
-random.seed(42)
-# Setup path to data folder
-data_path = Path("data/")
-image_path = data_path / "pizza_steak_sushi"
-image_path_list = list(image_path.glob("*/*/*.jpg"))
-# Setup train and testing paths
-train_dir = image_path / "train"
-test_dir = image_path / "test"
 
 # Make function to find classes in target directory
 def find_classes(directory):
