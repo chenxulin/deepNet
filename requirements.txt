@@ -1,0 +1,8 @@
+torch
+torchvision
+tqdm
+PIL
+typing
+pathlib
+zipfile
+requests
