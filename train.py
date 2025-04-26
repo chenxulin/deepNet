@@ -22,7 +22,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 NUM_WORKERS = 0
 BATCH_SIZE = 32
 epochs = 512
-class_names = 10
+class_names = 3
 
 # Set random seed
 random.seed(42)
@@ -37,8 +37,6 @@ test_dir = image_path / "test"
 train_data = ImageFolderCustom(targ_dir = train_dir, transform = Food_datasets.train_transforms())
 test_data = ImageFolderCustom(targ_dir = test_dir, transform = Food_datasets.test_transforms())
 
-# Get class names
-class_names = train_data.classes
 
 # Turn images into data loaders
 train_dataloader = DataLoader(
@@ -57,7 +55,7 @@ test_dataloader = DataLoader(
 )
 model = tinyVGG.TinyVGG(input_shape=3,
                               hidden_units=16, 
-                              output_shape=len(class_names)).to(device)
+                              output_shape=class_names).to(device)
 
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 loss_fn = torch.nn.CrossEntropyLoss()
@@ -115,5 +113,5 @@ for epoch in tqdm(range(epochs)):
     results["train_acc"].append(train_acc)
     # Save the model with help from utils.py
 utils.save_model(model=model,
-                target_dir="results",
+                target_dir="checkpoints",
                 model_name="best_model.pth")
