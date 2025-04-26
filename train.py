@@ -21,7 +21,7 @@ def main():
 
     NUM_WORKERS = 0
     BATCH_SIZE = 32
-    epochs = 512
+    epochs = 10
     class_names = 3
 
     # Set random seed
@@ -54,7 +54,7 @@ def main():
         pin_memory=True,
     )
     model = tinyVGG.TinyVGG(input_shape=3,
-                                hidden_units=16, 
+                                hidden_units=10, 
                                 output_shape=class_names).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)

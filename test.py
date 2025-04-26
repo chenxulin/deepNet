@@ -40,7 +40,7 @@ def main():
         pin_memory=True,
     )
     model = tinyVGG.TinyVGG(input_shape=3,
-                                hidden_units=16, 
+                                hidden_units=10, 
                                 output_shape=class_names).to(device)
     # Load the model state dict from the file
     model.load_state_dict(torch.load("./checkpoints/best_model.pth"))
