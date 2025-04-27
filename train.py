@@ -21,7 +21,7 @@ def main():
 
     NUM_WORKERS = 0
     BATCH_SIZE = 32
-    epochs = 10
+    epochs = 50
     class_names = 3
 
     # Set random seed
