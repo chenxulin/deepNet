@@ -68,15 +68,11 @@ def train_transforms():
     transforms.Resize((224, 224)),
     transforms.TrivialAugmentWide(num_magnitude_bins=31),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], # 3. A mean of [0.485, 0.456, 0.406] (across each colour channel)
-                         std=[0.229, 0.224, 0.225]) # 4. A standard deviation of [0.229, 0.224, 0.225] (across each colour channel),
   ])
   return train_transforms
 def test_transforms():
   test_transforms = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], # 3. A mean of [0.485, 0.456, 0.406] (across each colour channel)
-                         std=[0.229, 0.224, 0.225]) # 4. A standard deviation of [0.229, 0.224, 0.225] (across each colour channel),
   ])
   return test_transforms
