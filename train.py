@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader
 from Food_datasets import ImageFolderCustom
 from tqdm.auto import tqdm
 from typing import Dict, List, Tuple
+from torch.utils.tensorboard import SummaryWriter
 
 def main():
     # Set device to GPU if available, else CPU
@@ -23,7 +24,8 @@ def main():
     BATCH_SIZE = 32
     epochs = 100
     class_names = 3
-
+    # Create a writer with all default settings
+    writer = SummaryWriter()
     # Set random seed
     random.seed(42)
     # Setup path to data folder
@@ -112,7 +114,27 @@ def main():
         # Update results dictionary
         results["train_loss"].append(train_loss)
         results["train_acc"].append(train_acc)
-        # Save the model with help from utils.py
+                ### New: Experiment tracking ###
+        # Add loss results to SummaryWriter
+        writer.add_scalars(main_tag="Loss", 
+                           tag_scalar_dict={"train_loss": train_loss},
+                           global_step=epoch)
+
+        # Add accuracy results to SummaryWriter
+        writer.add_scalars(main_tag="Accuracy", 
+                           tag_scalar_dict={"train_acc": train_acc}, 
+                           global_step=epoch)
+        
+        # Track the PyTorch model architecture
+        writer.add_graph(model=model, 
+                         # Pass in an example input
+                         input_to_model=torch.randn(32, 3, 224, 224).to(device))
+    
+    # Close the writer
+    writer.close()
+    
+    ### End new ###
+    # Save the model with help from utils.py
     utils.save_model(model=model,
                     target_dir="checkpoints",
                     model_name="best_model.pth")
