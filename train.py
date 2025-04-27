@@ -21,7 +21,7 @@ def main():
 
     NUM_WORKERS = 0
     BATCH_SIZE = 32
-    epochs = 50
+    epochs = 100
     class_names = 3
 
     # Set random seed
@@ -104,7 +104,8 @@ def main():
                 }
         # Print out what's happening
         print(
-            f"Epoch: {epoch+1} | "
+            
+            f"\nEpoch: {epoch+1} | "
             f"train_loss: {train_loss:.4f} | "
             f"train_acc: {train_acc:.4f} | "
         )
