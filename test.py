@@ -43,7 +43,7 @@ def main():
                                 hidden_units=10, 
                                 output_shape=class_names).to(device)
     # Load the model state dict from the file
-    model.load_state_dict(torch.load("./checkpoints/best_model.pth"))
+    model.load_state_dict(torch.load("./checkpoints/best_model.pt"))
 
     loss_fn = torch.nn.CrossEntropyLoss()
     # Put model in eval mode

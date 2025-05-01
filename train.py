@@ -22,7 +22,7 @@ def main():
 
     NUM_WORKERS = 0
     BATCH_SIZE = 32
-    epochs = 100
+    epochs = 10
     class_names = 3
     # Create a writer with all default settings
     writer = SummaryWriter()
@@ -135,9 +135,7 @@ def main():
     
     ### End new ###
     # Save the model with help from utils.py
-    utils.save_model(model=model,
-                    target_dir="checkpoints",
-                    model_name="best_model.pth")
+    utils.save_model(model=model, target_dir="./checkpoints", model_name="best_model.pt")
 
 if __name__ == "__main__":
-    main()
+    main() 
